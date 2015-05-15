@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer.presenters;
+package com.energysystem.videoexplorerTV.presenters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.malmstein.androidtvexplorer.R;
-import com.malmstein.androidtvexplorer.video.Video;
+import com.energysystem.videoexplorerTV.R;
+import com.energysystem.videoexplorerTV.video.Video;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 

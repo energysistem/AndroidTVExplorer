@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer.video;
+package com.energysystem.videoexplorerTV.video;
 
 import android.util.Log;
 

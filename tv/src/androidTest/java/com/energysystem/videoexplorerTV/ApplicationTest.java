@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer;
+package com.energysystem.videoexplorerTV;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

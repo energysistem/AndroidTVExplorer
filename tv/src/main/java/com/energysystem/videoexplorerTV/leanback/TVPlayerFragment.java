@@ -1,8 +1,9 @@
-package com.malmstein.androidtvexplorer.leanback;
+package com.energysystem.videoexplorerTV.leanback;
 
 import android.app.Fragment;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,8 +17,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import com.malmstein.androidtvexplorer.R;
-import com.malmstein.androidtvexplorer.video.Video;
+import com.energysystem.videoexplorerTV.R;
+import com.energysystem.videoexplorerTV.video.Video;
 
 import java.util.Locale;
 import java.util.Timer;
@@ -156,7 +157,7 @@ public class TVPlayerFragment extends Fragment {
     }
 
     private void playVideo() {
-        videoView.setVideoPath(selectedVideo.getVideoUrl());
+        videoView.setVideoURI(Uri.parse(selectedVideo.getVideoUrl()));
         mPlaybackState = PlaybackState.PLAYING;
         updatePlayButton(mPlaybackState);
         videoView.start();

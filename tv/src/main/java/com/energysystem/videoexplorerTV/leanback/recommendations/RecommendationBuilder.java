@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.malmstein.androidtvexplorer.leanback.recommendations;
+package com.energysystem.videoexplorerTV.leanback.recommendations;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -23,8 +23,8 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.malmstein.androidtvexplorer.R;
-import com.malmstein.androidtvexplorer.presenters.Utils;
+import com.energysystem.videoexplorerTV.R;
+import com.energysystem.videoexplorerTV.presenters.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;

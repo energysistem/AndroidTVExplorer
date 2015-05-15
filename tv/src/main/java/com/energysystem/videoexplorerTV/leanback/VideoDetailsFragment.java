@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer.leanback;
+package com.energysystem.videoexplorerTV.leanback;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,13 +24,13 @@ import android.support.v17.leanback.widget.RowPresenter;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
-import com.malmstein.androidtvexplorer.R;
-import com.malmstein.androidtvexplorer.presenters.CardPresenter;
-import com.malmstein.androidtvexplorer.presenters.PicassoBackgroundManagerTarget;
-import com.malmstein.androidtvexplorer.presenters.Utils;
-import com.malmstein.androidtvexplorer.presenters.VideoDetailsPresenter;
-import com.malmstein.androidtvexplorer.video.Video;
-import com.malmstein.androidtvexplorer.video.VideoProvider;
+import com.energysystem.videoexplorerTV.R;
+import com.energysystem.videoexplorerTV.presenters.CardPresenter;
+import com.energysystem.videoexplorerTV.presenters.PicassoBackgroundManagerTarget;
+import com.energysystem.videoexplorerTV.presenters.Utils;
+import com.energysystem.videoexplorerTV.presenters.VideoDetailsPresenter;
+import com.energysystem.videoexplorerTV.video.Video;
+import com.energysystem.videoexplorerTV.video.VideoProvider;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -141,12 +141,13 @@ public class VideoDetailsFragment extends DetailsFragment {
 
             ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(new CardPresenter());
             for (Map.Entry<String, List<Video>> entry : videos.entrySet()) {
-                if (selectedVideo.getCategory().indexOf(entry.getKey()) >= 0) {
+
+
                     List<Video> list = entry.getValue();
                     for (int j = 0; j < list.size(); j++) {
                         listRowAdapter.add(list.get(j));
                     }
-                }
+
             }
             HeaderItem header = new HeaderItem(0, subcategories[0], null);
             adapter.add(new ListRow(header, listRowAdapter));

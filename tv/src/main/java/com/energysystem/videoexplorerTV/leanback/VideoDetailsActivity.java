@@ -1,9 +1,9 @@
-package com.malmstein.androidtvexplorer.leanback;
+package com.energysystem.videoexplorerTV.leanback;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.malmstein.androidtvexplorer.R;
+import com.energysystem.videoexplorerTV.R;
 
 public class VideoDetailsActivity extends Activity {
 

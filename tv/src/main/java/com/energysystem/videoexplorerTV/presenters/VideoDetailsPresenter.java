@@ -1,8 +1,8 @@
-package com.malmstein.androidtvexplorer.presenters;
+package com.energysystem.videoexplorerTV.presenters;
 
 import android.support.v17.leanback.widget.AbstractDetailsDescriptionPresenter;
 
-import com.malmstein.androidtvexplorer.video.Video;
+import com.energysystem.videoexplorerTV.video.Video;
 
 public class VideoDetailsPresenter extends AbstractDetailsDescriptionPresenter {
 

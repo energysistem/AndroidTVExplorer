@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidTVExplorer.iml" filepath="$PROJECT_DIR$/AndroidTVExplorer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidTVExplorer2.iml" filepath="$PROJECT_DIR$/AndroidTVExplorer2.iml" />
       <module fileurl="file://$PROJECT_DIR$/tv/tv.iml" filepath="$PROJECT_DIR$/tv/tv.iml" />
     </modules>
   </component>

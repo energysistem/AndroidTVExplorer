@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package com.malmstein.androidtvexplorer.video;
+package com.energysystem.videoexplorerTV.video;
 
+import android.content.ContentUris;
 import android.content.Context;
+import android.database.Cursor;
+import android.provider.MediaStore;
 import android.util.Log;
 
-import com.malmstein.androidtvexplorer.R;
+import com.energysystem.videoexplorerTV.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -30,8 +33,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -97,14 +100,37 @@ public class VideoProvider {
         return mMovieList;
     }
 
-    public static HashMap<String, List<Video>> buildMedia(String url)
+    public static HashMap<String, List<Video>> buildMedia(String url, Cursor data)
             throws JSONException {
         if (null != mMovieList) {
             return mMovieList;
         }
         mMovieList = new HashMap<String, List<Video>>();
+        Log.e("Abrimos","Videos");
+        List<Video> categoryList = new ArrayList<Video>();
 
-        JSONObject jsonObj = new VideoProvider().parseUrl(url);
+                while (data.moveToNext()) {
+                        int videoID = data.getInt(data.getColumnIndex(MediaStore.Video.Media._ID));
+                        int title = data.getColumnIndexOrThrow(MediaStore.Video.Media.TITLE);
+                        int category = data.getColumnIndexOrThrow(MediaStore.Video.Media.CATEGORY);
+                        int durationID = data.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION);
+                        //int videoUrl = data.getColumnIndexOrThrow(MediaStore.Video.Media.EXTERNAL_CONTENT_URI.toString());
+                       // int bgImageUrl = data.getColumnIndexOrThrow(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI.toString());
+                    Log.e("Data",ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString());
+                    int duration = Integer.parseInt(data.getString(durationID));
+                    categoryList.add(buildMovieInfo(data.getString(category), data.getString(title), "Descripcion", String.format("%d min, %d sec",
+                                    TimeUnit.MILLISECONDS.toMinutes(duration),
+                                    TimeUnit.MILLISECONDS.toSeconds(duration) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
+                            ),
+                            ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(), ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(),
+                            ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString()));
+                    mMovieList.put(data.getColumnName(category), categoryList);
+                }
+
+
+
+        /*JSONObject jsonObj = new VideoProvider().parseUrl(url);
         JSONArray categories = jsonObj.getJSONArray(TAG_GOOGLE_VIDEOS);
         if (null != categories) {
             Log.d(TAG, "category #: " + categories.length());
@@ -143,7 +169,7 @@ public class VideoProvider {
                     mMovieList.put(category_name, categoryList);
                 }
             }
-        }
+        }*/
         return mMovieList;
     }
 

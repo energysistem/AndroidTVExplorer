@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer.leanback.recommendations;
+package com.energysystem.videoexplorerTV.leanback.recommendations;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

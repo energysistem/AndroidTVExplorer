@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer.leanback;
+package com.energysystem.videoexplorerTV.leanback;
 
 import android.app.LoaderManager;
 import android.content.Intent;
@@ -22,13 +22,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.malmstein.androidtvexplorer.R;
-import com.malmstein.androidtvexplorer.presenters.CardPresenter;
-import com.malmstein.androidtvexplorer.presenters.GridItemPresenter;
-import com.malmstein.androidtvexplorer.presenters.PicassoBackgroundManagerTarget;
-import com.malmstein.androidtvexplorer.video.Video;
-import com.malmstein.androidtvexplorer.video.VideoItemLoader;
-import com.malmstein.androidtvexplorer.video.VideoProvider;
+import com.energysystem.videoexplorerTV.R;
+import com.energysystem.videoexplorerTV.presenters.CardPresenter;
+import com.energysystem.videoexplorerTV.presenters.GridItemPresenter;
+import com.energysystem.videoexplorerTV.presenters.PicassoBackgroundManagerTarget;
+import com.energysystem.videoexplorerTV.video.Video;
+import com.energysystem.videoexplorerTV.video.VideoItemLoader;
+import com.energysystem.videoexplorerTV.video.VideoProvider;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 

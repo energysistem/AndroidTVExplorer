@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer.leanback.recommendations;
+package com.energysystem.videoexplorerTV.leanback.recommendations;
 
 import android.app.IntentService;
 import android.app.PendingIntent;
@@ -6,10 +6,10 @@ import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.util.Log;
 
-import com.malmstein.androidtvexplorer.R;
-import com.malmstein.androidtvexplorer.leanback.VideoDetailsActivity;
-import com.malmstein.androidtvexplorer.video.Video;
-import com.malmstein.androidtvexplorer.video.VideoProvider;
+import com.energysystem.videoexplorerTV.R;
+import com.energysystem.videoexplorerTV.leanback.VideoDetailsActivity;
+import com.energysystem.videoexplorerTV.video.Video;
+import com.energysystem.videoexplorerTV.video.VideoProvider;
 
 import java.io.IOException;
 import java.util.HashMap;

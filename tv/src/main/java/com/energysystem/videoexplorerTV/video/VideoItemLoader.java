@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package com.malmstein.androidtvexplorer.video;
+package com.energysystem.videoexplorerTV.video;
 
 import android.content.AsyncTaskLoader;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
+import android.os.Looper;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -41,7 +45,10 @@ public class VideoItemLoader extends AsyncTaskLoader<HashMap<String, List<Video>
     @Override
     public HashMap<String, List<Video>> loadInBackground() {
         try {
-            return VideoProvider.buildMedia(mUrl);
+
+            Looper.prepare();
+
+            return VideoProvider.buildMedia(mUrl, MakeCursor());
         } catch (Exception e) {
             Log.e(TAG, "Failed to fetch media data", e);
             return null;
@@ -54,12 +61,39 @@ public class VideoItemLoader extends AsyncTaskLoader<HashMap<String, List<Video>
         forceLoad();
     }
 
+    private Cursor mCursor;
+    private String mWhereClause;
+    private String mSortOrder;
+
     /**
      * Handles a request to stop the Loader.
      */
     @Override
     protected void onStopLoading() {
         cancelLoad();
+    }
+
+    private Cursor MakeCursor() {
+        ContentResolver resolver = mContext.getContentResolver();
+        String[] cols = new String[] {
+                MediaStore.Video.Media._ID,
+                MediaStore.Video.Media.TITLE,
+                MediaStore.Video.Media.DATA,
+                MediaStore.Video.Media.DURATION,
+                MediaStore.Video.Media.MIME_TYPE,
+                MediaStore.Video.Media.ARTIST,
+                MediaStore.Video.Media.CATEGORY
+        };
+
+        if (resolver == null) {
+            System.out.println("resolver = null");
+        } else {
+            mSortOrder = MediaStore.Video.Media.TITLE + " COLLATE UNICODE";
+            mWhereClause = MediaStore.Video.Media.TITLE + " != ''";
+            mCursor = resolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                    cols, mWhereClause , null, mSortOrder);
+        }
+        return mCursor;
     }
 
 }

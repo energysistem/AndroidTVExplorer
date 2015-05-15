@@ -1,4 +1,4 @@
-package com.malmstein.androidtvexplorer.presenters;
+package com.energysystem.videoexplorerTV.presenters;
 
 import android.graphics.Color;
 import android.support.v17.leanback.widget.Presenter;
@@ -6,7 +6,7 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.malmstein.androidtvexplorer.R;
+import com.energysystem.videoexplorerTV.R;
 
 public class GridItemPresenter extends Presenter {
 
