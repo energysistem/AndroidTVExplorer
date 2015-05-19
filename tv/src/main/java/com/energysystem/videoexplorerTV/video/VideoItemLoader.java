@@ -19,7 +19,9 @@ package com.energysystem.videoexplorerTV.video;
 import android.content.AsyncTaskLoader;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -45,9 +47,11 @@ public class VideoItemLoader extends AsyncTaskLoader<HashMap<String, List<Video>
     @Override
     public HashMap<String, List<Video>> loadInBackground() {
         try {
+            if(Looper.myLooper()==null)// check already Looper is associated or not.
+                Looper.prepare();// No Looper is defined So define a new one
 
-            Looper.prepare();
 
+            Log.e("loadInBackground","VideoItemLoader");
             return VideoProvider.buildMedia(mUrl, MakeCursor());
         } catch (Exception e) {
             Log.e(TAG, "Failed to fetch media data", e);
@@ -73,7 +77,7 @@ public class VideoItemLoader extends AsyncTaskLoader<HashMap<String, List<Video>
         cancelLoad();
     }
 
-    private Cursor MakeCursor() {
+    public Cursor MakeCursor() {
         ContentResolver resolver = mContext.getContentResolver();
         String[] cols = new String[] {
                 MediaStore.Video.Media._ID,
@@ -82,7 +86,9 @@ public class VideoItemLoader extends AsyncTaskLoader<HashMap<String, List<Video>
                 MediaStore.Video.Media.DURATION,
                 MediaStore.Video.Media.MIME_TYPE,
                 MediaStore.Video.Media.ARTIST,
-                MediaStore.Video.Media.CATEGORY
+                MediaStore.Video.Media.CATEGORY,
+                MediaStore.Video.Media.DATA
+
         };
 
         if (resolver == null) {
@@ -93,6 +99,7 @@ public class VideoItemLoader extends AsyncTaskLoader<HashMap<String, List<Video>
             mCursor = resolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
                     cols, mWhereClause , null, mSortOrder);
         }
+        Log.e("Cursor","Tamano: "+mCursor.getCount());
         return mCursor;
     }
 

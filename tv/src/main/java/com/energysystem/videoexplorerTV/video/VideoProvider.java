@@ -26,6 +26,7 @@ import com.energysystem.videoexplorerTV.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -102,30 +103,47 @@ public class VideoProvider {
 
     public static HashMap<String, List<Video>> buildMedia(String url, Cursor data)
             throws JSONException {
-        if (null != mMovieList) {
-            return mMovieList;
-        }
+
         mMovieList = new HashMap<String, List<Video>>();
+        mMovieList.clear();
         Log.e("Abrimos","Videos");
         List<Video> categoryList = new ArrayList<Video>();
+        List<Video> categoryList2 = new ArrayList<Video>();
 
                 while (data.moveToNext()) {
                         int videoID = data.getInt(data.getColumnIndex(MediaStore.Video.Media._ID));
                         int title = data.getColumnIndexOrThrow(MediaStore.Video.Media.TITLE);
                         int category = data.getColumnIndexOrThrow(MediaStore.Video.Media.CATEGORY);
                         int durationID = data.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION);
+                        int data_string = data.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
                         //int videoUrl = data.getColumnIndexOrThrow(MediaStore.Video.Media.EXTERNAL_CONTENT_URI.toString());
                        // int bgImageUrl = data.getColumnIndexOrThrow(MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI.toString());
-                    Log.e("Data",ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString());
+
                     int duration = Integer.parseInt(data.getString(durationID));
-                    categoryList.add(buildMovieInfo(data.getString(category), data.getString(title), "Descripcion", String.format("%d min, %d sec",
-                                    TimeUnit.MILLISECONDS.toMinutes(duration),
-                                    TimeUnit.MILLISECONDS.toSeconds(duration) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
-                            ),
-                            ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(), ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(),
-                            ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString()));
-                    mMovieList.put(data.getColumnName(category), categoryList);
+
+                    String categoria = new File(data.getString(data_string)).getParent();
+                    Log.e("Ruta:", categoria);
+                    if(categoria.equals("/storage/emulated/0/Movies")) {
+                        categoryList.add(buildMovieInfo(categoria, data.getString(title), "Descripcion", String.format("%d min, %d sec",
+                                        TimeUnit.MILLISECONDS.toMinutes(duration),
+                                        TimeUnit.MILLISECONDS.toSeconds(duration) -
+                                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
+                                ),
+                                ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(), ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(),
+                                ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString()));
+                        mMovieList.put("Almacenamiento Interno", categoryList);
+                    }
+                    else
+                    {
+                        categoryList2.add(buildMovieInfo(categoria, data.getString(title), "Descripcion", String.format("%d min, %d sec",
+                                        TimeUnit.MILLISECONDS.toMinutes(duration),
+                                        TimeUnit.MILLISECONDS.toSeconds(duration) -
+                                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
+                                ),
+                                ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(), ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString(),
+                                ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, videoID).toString()));
+                        mMovieList.put("USB", categoryList2);
+                    }
                 }
 
 
@@ -170,6 +188,7 @@ public class VideoProvider {
                 }
             }
         }*/
+        Log.e("VideoProvider","Tamano mMovie: "+mMovieList.size());
         return mMovieList;
     }
 

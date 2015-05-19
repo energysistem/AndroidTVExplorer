@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,6 +100,18 @@ public class TVPlayerFragment extends Fragment {
                 if (currentPos < videoDuration) {
                     play(currentPos);
                 }
+            case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
+                if(mPlaybackState==PlaybackState.PLAYING)
+                {
+                    pause();
+                }
+                else
+                {
+                    currentPos = videoView.getCurrentPosition();
+                    play(currentPos);
+                }
+                default:
+                    Log.e("keycode",keyCode+"");
         }
     }
 
