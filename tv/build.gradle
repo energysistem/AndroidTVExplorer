@@ -6,7 +6,7 @@ android {
     buildToolsVersion "21.0.0"
 
     defaultConfig {
-        applicationId "com.malmstein.androidtvexplorer"
+        applicationId "com.energysystem.videoexplorerTV"
         minSdkVersion 17
         targetSdkVersion 20
         versionCode 1
