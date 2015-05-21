@@ -281,7 +281,7 @@ public class ExplorerFragment extends BrowseFragment implements LoaderManager.Lo
         setOnSearchClickedListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Implement your own in-app search", Toast.LENGTH_LONG)
+                Toast.makeText(getActivity(), "Próximamente...", Toast.LENGTH_SHORT)
                         .show();
             }
         });
